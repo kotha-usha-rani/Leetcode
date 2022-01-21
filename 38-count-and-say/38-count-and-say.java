@@ -1,18 +1,16 @@
 class Solution {
     
-    public ArrayList<Integer> cAS(int temp, int n, ArrayList<Integer> current){
+    public StringBuilder cAS(int temp, int n, StringBuilder current){
         if(temp > n)
             return current;
-        ArrayList<Integer> smallAns = new ArrayList<>();
-        for(int i=0 ; i<current.size() ;){
-            int ch = current.get(i);
-            int count = 0;
-            while(i<current.size() && current.get(i) == ch){
+        StringBuilder smallAns = new StringBuilder();
+        for(int i=0 ; i<current.length() ;i++){
+            int count = 1;
+            while(i+1<current.length() && current.charAt(i+1) == current.charAt(i)){
                 count++;
                 i++;
             }
-            smallAns.add(count);
-            smallAns.add(ch);
+            smallAns.append(count).append(current.charAt(i));
         }
         return cAS(temp+1, n, smallAns);
         
@@ -46,13 +44,7 @@ class Solution {
        //  return sb.toString(); 
         
         //Recursion
-        ArrayList<Integer> current = new ArrayList<>();
-        current.add(1);
-        current = cAS(2, n, current);
-        StringBuilder ans = new StringBuilder();
-        for(int i=0 ; i<current.size() ; i++){
-            ans.append(current.get(i));
-        }
-        return ans.toString();
+    
+        return cAS(2, n, new StringBuilder("1")).toString();
     }
 }
