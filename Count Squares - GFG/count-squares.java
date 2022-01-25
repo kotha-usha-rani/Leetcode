@@ -23,13 +23,18 @@ class GFG {
 
 class Solution {
     static int countSquares(int N) {
-        // code here
-        double end = Math.sqrt(N);
-        int count = 0;
-        for(int i=1 ; i<end ; i++){
-            if(i*i < N)
-                count++;
-        }
-        return count;
+        
+        //Method 1 check for each number less than queare root of N
+        // double end = Math.sqrt(N);
+        // int count = 0;
+        // for(int i=1 ; i<end ; i++){
+        //     if(i*i < N)
+        //         count++;
+        // }
+        // return count;
+        
+        
+        //Method 2 number of perfect squares = sqrt(n-1)
+        return (int)Math.sqrt(N-1);
     }
 }
