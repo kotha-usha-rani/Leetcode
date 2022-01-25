@@ -18,7 +18,7 @@ class Solution {
 		int first = binarySearch(arr, 0, arr.length-1, target);
         if(first < arr.length && arr[first] != target || first >= arr.length)
             return new int[]{-1, -1};
-        int second = binarySearch(arr, 0, arr.length-1, target+1)-1;
+        int second = binarySearch(arr, first, arr.length-1, target+1)-1;
         return new int[]{first, second};
     }
 }
