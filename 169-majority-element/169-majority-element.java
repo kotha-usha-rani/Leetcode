@@ -22,18 +22,41 @@ class Solution {
         //     return prev;
         // return ele;  
         
-        //maintain a count, after traversing the array once is the count value is greater than 1 then the element associated to the count is the answer
-        int count = 0;
-        int ele = 0;
+        //maintain a count, after traversing the array once is the count value is greater than 1 then the element associated to the count is the answer, majority element always exits in the array, so count of majority element is always greater than the count of rest of the elements Therefore maj(count) - rest(count) >= 1
+        // int count = 0;
+        // int ele = 0;
+        // for(int i=0 ; i<nums.length ; i++){
+        //     if(count == 0){
+        //         ele = nums[i];
+        //     }
+        //     if(nums[i] == ele)
+        //         count++;
+        //     else
+        //         count--;
+        // }
+        // return ele;
+        
+        //HashMap to store the count of elements\
+        HashMap<Integer, Integer> map = new HashMap<>();
         for(int i=0 ; i<nums.length ; i++){
-            if(count == 0){
-                ele = nums[i];
-            }
-            if(nums[i] == ele)
-                count++;
+            if(map.containsKey(nums[i]))
+               map.put(nums[i], map.get(nums[i])+1);
             else
-                count--;
+               map.put(nums[i], 1);
         }
-        return ele;
+        for(Integer ele : map.keySet()){
+            if(map.get(ele) > nums.length/2)
+                return ele;
+        }
+        return 0;
     }
 }
+
+
+
+
+
+
+
+
+
