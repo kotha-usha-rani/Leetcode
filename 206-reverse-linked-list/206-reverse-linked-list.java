@@ -14,7 +14,7 @@ class Solution {
             return head ;
         ListNode newHead = reverse(head.next);
         head.next.next = head;
-        head.next = null;
+        //head.next = null;
         return newHead;
     }
     public ListNode reverseList(ListNode head) {
@@ -34,6 +34,8 @@ class Solution {
         
         //Method 2 recursion
         ListNode newHead = reverse(head);
+        if(head != null)
+            head.next = null;
         return newHead;
         
     }
