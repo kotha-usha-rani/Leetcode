@@ -10,18 +10,22 @@
  */
 class Solution {
     public ListNode reverseList(ListNode head) {
+        //Method 1 change the links TC=O(n), SC=O(1)
         if(head == null || head.next == null)
             return head;
-        ListNode temp = head.next;
-        ListNode nextNode = head.next;
+        ListNode prev = null;
+        ListNode nextNode = null;
         ListNode current = head;
-        while(temp != null){
-            temp = nextNode.next ;
-            nextNode.next = current ;
-            current = nextNode ;
-            nextNode = temp;
+        while(current != null){
+            nextNode = current.next;
+            current.next = prev ;
+            prev = current;
+            current = nextNode;
         }
-        head.next = null;
-        return current;
+        return prev;
+        
+        //Method 2 recursion
+        
+        
     }
 }
