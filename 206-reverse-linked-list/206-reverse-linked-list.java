@@ -9,6 +9,7 @@
  * }
  */
 class Solution {
+     //Method 2 recursion
     public ListNode reverse(ListNode head){
         if(head == null || head.next == null)
             return head ;
@@ -16,6 +17,21 @@ class Solution {
         head.next.next = head;
         //head.next = null;
         return newHead;
+    }
+    
+    //Method 3 resusive just like iteratie approach
+    public ListNode reverse2(ListNode current, ListNode prev, ListNode next){
+        if(current == null)
+            return current;
+        if(current.next == null){
+            current.next = prev ;
+            return current;
+            
+        }
+        next = current.next;
+        current.next = prev ;
+        return reverse2(next, current, next);
+        
     }
     public ListNode reverseList(ListNode head) {
         //Method 1 change the links TC=O(n), SC=O(1)
@@ -33,10 +49,19 @@ class Solution {
         // return prev;
         
         //Method 2 recursion
-        ListNode newHead = reverse(head);
-        if(head != null)
-            head.next = null;
-        return newHead;
+        // ListNode newHead = reverse(head);
+        // if(head != null)
+        //     head.next = null;
+        // return newHead;
         
+        //Method 3 resusive just like iteratie approach
+        
+        return  reverse2(head, null, null);       
     }
 }
+
+
+
+
+
+
