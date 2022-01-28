@@ -80,11 +80,37 @@ class Solution
             return head;
         }
         //Method 1 recursive
-        int temp = head.data;
-       int ans = solution(head);
-       if(ans != 0)
-        head.data = temp+ans;
-       return head;
+        //   int temp = head.data;
+        //   int ans = solution(head);
+        //   if(ans != 0)
+        //     head.data = temp+ans;
+        //   return head;
+    
+        //Method 2 using arraylist to store data
+        ArrayList<Integer> arr = new ArrayList<>();
+        Node temp = head;
+        while(temp != null){
+            arr.add(temp.data);
+            temp = temp.next ;
+        }
+        int rem = 1;
+        for(int i=arr.size()-1 ; i>=0 ; i--){
+            int data = arr.get(i)+rem;
+            arr.set(i, data%10);
+            if(data != 10)
+                rem=0;
+        }
+        if(rem == 1){
+            arr.set(0, head.data+rem);
+        }
+        temp = head;
+        int i=0;
+        while(temp != null){
+            temp.data = arr.get(i);
+            temp = temp.next;
+            i++;
+        }
+        return head;
     }
 }
 
