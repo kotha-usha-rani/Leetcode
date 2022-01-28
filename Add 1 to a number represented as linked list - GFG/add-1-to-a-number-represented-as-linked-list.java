@@ -60,12 +60,8 @@ class Node{
 class Solution
 {
     public static int solution(Node head){
-        if(head.next == null){
-            int data = head.data+1;
-            head.data = data%10;
-            if(data == 10)
-                return 1;
-            return 0;
+        if(head == null){
+            return 1;
         }
         int rem = solution(head.next);
         int data = head.data+rem;
@@ -83,6 +79,7 @@ class Solution
             head.data = head.data+1;
             return head;
         }
+        //Method 1 recursive
         int temp = head.data;
        int ans = solution(head);
        if(ans != 0)
