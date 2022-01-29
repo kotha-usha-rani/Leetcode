@@ -41,6 +41,8 @@ class Solution {
             while(j >=0 && arr[i][j] == 1){
                 j--;
                 max = i;
+                if(j < 0)
+                    return max ;
             }
         }
         return max;
