@@ -67,24 +67,17 @@ public class Solution {
         //Method 3 using two pointers
         ListNode temp1 = headA;
         ListNode temp2 = headB;
-        int count = 0 ;
-        while(temp1 != null || temp2 != null){
-            if(temp1 == temp2)
-                return temp1;
+        while(temp1 != temp2){
             temp1 = temp1.next ;
             temp2 = temp2.next ;
-            
-            if(temp1 == null){
-                count++;
-                if(count == 2)
-                    break;
+            if(temp1 == temp2)
+                return temp1;           
+            if(temp1 == null)
                 temp1 = headB;
-            }
-            if(temp2 == null){
+            if(temp2 == null)
                 temp2 = headA;
-            }
         }
-        return null;
+        return temp1;
     }
 }
 
