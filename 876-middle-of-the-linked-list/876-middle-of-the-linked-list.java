@@ -13,18 +13,27 @@ class Solution {
         if(head.next == null)
             return head;
         //Method 1 count the number of nodes in the list, return the middle node
-        ListNode temp = head;
-        int count = 0;
-        while(temp != null){
-            count++;
-            temp = temp.next;
+        // ListNode temp = head;
+        // int count = 0;
+        // while(temp != null){
+        //     count++;
+        //     temp = temp.next;
+        // }
+        // count = count/2+1;
+        // temp = head;
+        // while(count > 1){
+        //     temp = temp.next;
+        //     count--;
+        // }
+        // return temp;
+        
+        //Method 2 using fast and slow pointers
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next ;
         }
-        count = count/2+1;
-        temp = head;
-        while(count > 1){
-            temp = temp.next;
-            count--;
-        }
-        return temp;
+        return slow;
     }
 }
