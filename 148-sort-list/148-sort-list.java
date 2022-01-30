@@ -23,31 +23,33 @@ class Solution {
             return t2 ;
         }
     }
-    public ListNode sort(ListNode start, ListNode end, int count){
+    public ListNode findMid(ListNode start){
+        ListNode slow = start;
+        ListNode fast = start;
+        ListNode prev = start;
+        while(fast != null && fast.next != null){
+            prev = slow;
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        if(fast == null)
+            return prev;
+        else
+            return slow;
+    }
+    public ListNode sort(ListNode start){
         if(start == null || start.next == null)
             return start;
-        int mid = count/2;
-        ListNode temp = start ;
-        int i=mid;
-        while(i>0){
-            temp = temp.next;
-            i--;
-        }
-        ListNode midNext = temp.next;
-        temp.next = null;
-        ListNode left = sort(start, temp, mid);
-        ListNode right = sort(midNext, end, count-mid-1);
+        ListNode mid = findMid(start);
+        ListNode midNext = mid.next;
+        mid.next = null;
+        ListNode left = sort(start);
+        ListNode right = sort(midNext);
         return mergeSort(left, right);
     }
     public ListNode sortList(ListNode head) {
         if(head == null || head.next == null)
             return head;
-        ListNode temp = head;
-        int count = 0;
-        while(temp != null){
-            count++;
-            temp = temp.next;
-        }
-        return sort(head, null, count);
+        return sort(head);
     }
 }
