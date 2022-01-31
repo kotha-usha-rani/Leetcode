@@ -47,9 +47,32 @@ class Solution {
         ListNode right = sort(midNext);
         return mergeSort(left, right);
     }
+    
+    //Method 2 
+    public ListNode sortUsingBubbleSort(ListNode head){
+        if(head.next == null)
+            return head;
+        head.next = sortUsingBubbleSort(head.next);
+        ListNode tempHead = head;
+        while(head.next != null){
+            if(head.val > head.next.val){
+                int temp = head.val;
+                head.val = head.next.val;
+                head.next.val = temp;
+            }
+            else
+                break;
+            head = head.next;
+        }
+        return tempHead ;
+    }
     public ListNode sortList(ListNode head) {
         if(head == null || head.next == null)
             return head;
-        return sort(head);
+        //Method 1 merge sort just like arrays
+        //return sort(head);
+        
+        //Method 2 bubble sort using recursion 
+        return sortUsingBubbleSort(head);
     }
 }
