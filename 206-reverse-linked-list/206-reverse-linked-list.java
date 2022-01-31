@@ -33,6 +33,21 @@ class Solution {
         return reverse2(next, current, next);
         
     }
+    
+     //Method 4 resusive
+    public ListNode reverse3(ListNode head){
+        if(head == null || head.next == null)
+            return head;
+        ListNode ans = reverse3(head.next);
+        ListNode temp = ans;
+        while(temp.next != null){
+            temp = temp.next;
+        }
+        temp.next = head;
+        head.next = null;
+        return ans;
+    }
+    
     public ListNode reverseList(ListNode head) {
         //Method 1 change the links TC=O(n), SC=O(1)
         // if(head == null || head.next == null)
@@ -55,8 +70,12 @@ class Solution {
         // return newHead;
         
         //Method 3 resusive just like iteratie approach
+        // return  reverse2(head, null, null);     
         
-        return  reverse2(head, null, null);       
+        //Method 4 recursion
+        return reverse3(head);
+        
+        
     }
 }
 
