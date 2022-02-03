@@ -26,27 +26,19 @@ class Solution {
         
         Stack<Integer> smaller_Index = new Stack<>();
         HashMap<Integer, Integer> nextGreater = new HashMap<>();
-        int prev = Integer.MAX_VALUE;
-        for(int i=0 ; i<nums2.length ; i++){
-            if(nums2[i] < prev){
-                smaller_Index.push(nums2[i]);
-                prev = nums2[i];
+        for(int ele : nums2){     
+            while(!smaller_Index.isEmpty() && smaller_Index.peek() < ele){
+                nextGreater.put(smaller_Index.pop(), ele);                    
             }
-            else{
-                while(!smaller_Index.isEmpty() && smaller_Index.peek() < nums2[i]){
-                    nextGreater.put(smaller_Index.pop(), nums2[i]);                    
-                }
-                smaller_Index.push(nums2[i]);
-                prev = nums2[i] ;                 
-            }
+            smaller_Index.push(ele);
         }
         while(!smaller_Index.isEmpty()){
             nextGreater.put(smaller_Index.pop(), -1);           
         }
         int[] ans = new int[nums1.length];
         int k=0;
-        for(int i=0 ; i<nums1.length ; i++){
-            ans[k++] = nextGreater.get(nums1[i]) ;
+        for(int ele : nums1){
+            ans[k++] = nextGreater.get(ele) ;
         }
         return ans;
     }
