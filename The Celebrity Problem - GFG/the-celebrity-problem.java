@@ -61,17 +61,9 @@ class Solution
         int[] count = new int[n];
         for(int i=0 ; i<n ; i++){
             for(int j=0 ; j<n ; j++){
-                if(arr[i][j] == 1){
+                if(arr[i][j] == 1 && arr[j][i] != 1){
                     count[j]++;
                 }
-            }
-        }
-        for(int i=0; i<n ; i++){
-            int j=0;
-            while(count[i] >= n-1 && j<n){
-                if(arr[i][j] == 1)
-                    count[i]--;
-                j++;
             }
         }
         for(int i=0 ; i<n ; i++){
