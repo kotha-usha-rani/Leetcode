@@ -21,14 +21,43 @@ class Solution {
         // }
         // return arr[arr.length-1];
         
-        //Method 3: if the values in the array can be changed, make the numbers visited as neagative            using the element at current index as index
-        int index = 0;
-        for(int i=0 ; i<arr.length ; i++){
-            index = Math.abs(arr[i]);
-            if(arr[index] < 0)
-                return index;
-            arr[index] = -arr[index];
+        //Method 3: if the values in the array can be changed, make the numbers visited as neagative using                      the element at current index as index
+        // int index = 0;
+        // for(int i=0 ; i<arr.length ; i++){
+        //     index = Math.abs(arr[i]);
+        //     if(arr[index] < 0)
+        //         return index;
+        //     arr[index] = -arr[index];
+        // }
+        // return 0;
+        
+        //Method 4 using floyd's cycle detection algorithm
+        int slow = arr[0];
+        int fast = arr[0];
+        while(true){
+            slow = arr[slow];
+            fast = arr[arr[fast]];
+            if(slow == fast)
+                break;            
         }
-        return 0;
+        slow = arr[0];
+        while(slow != fast){
+            slow = arr[slow];
+            fast = arr[fast];
+        }
+        return slow;
+        
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
