@@ -45,51 +45,64 @@ class Solution {
         arr1[i] = arr2[j];
         arr2[j] = temp;
     }
-    
-    // public void sortIn(int[] arr1, int[] arr2, int start, int end){
-        
-    // }
     public void merge(int arr1[], int arr2[], int n, int m) {
         //method 3 using gap algorithm
-        int i, j, gap, temp;
-        Boolean isIinArr2, isJinArr1;
-        gap = m+n;
-        while(gap != 1){
-            isJinArr1 = false;
-            if(gap%2 != 0)
-                gap = (int)Math.ceil(gap/2.0);
-            else
-                gap = gap/2;
-            i=0;
-            if(gap > n-1)
-                j = gap-n ;
+        // int i, j, gap, temp;
+        // Boolean isIinArr2, isJinArr1;
+        // gap = m+n;
+        // while(gap != 1){
+        //     isJinArr1 = false;
+        //     if(gap%2 != 0)
+        //         gap = (int)Math.ceil(gap/2.0);
+        //     else
+        //         gap = gap/2;
+        //     i=0;
+        //     if(gap > n-1)
+        //         j = gap-n ;
+        //     else{
+        //         j = gap;
+        //         isJinArr1 = true;
+        //     }
+        //     isIinArr2 = false;
+        //     if(isJinArr1){
+        //         while(j<n){
+        //             if(arr1[i] > arr1[j])
+        //                 swap(arr1, arr1, i, j);
+        //             i++;j++;
+        //         }
+        //         sortIn(arr1, i, j);
+        //         j=0;
+        //     }  
+        //     while(i < n && j<m){
+        //         if(arr1[i] > arr2[j])
+        //             swap(arr1, arr2, i, j);
+        //         i++;j++;
+        //     }
+        //     i=0;
+        //     while(j<m){
+        //         if(arr2[i] > arr2[j])
+        //             swap(arr2, arr2, i, j);
+        //         i++; j++;
+        //     }
+        //     sortIn(arr2, i, j);
+        //}
+        
+        //Method 4 partialy sorting both the arrays such that all the smaller elements
+        //lie in the first array and the larger elements lie in the second array
+        
+        int i=0, j=0, k=n-1;
+        while(i<=k && j<m){
+            if(arr1[i] > arr2[j]){
+                int temp = arr1[k];
+                arr1[k] = arr2[j];
+                arr2[j] = temp;
+                j++; k--;
+            }
             else{
-                j = gap;
-                isJinArr1 = true;
+                i++;
             }
-            isIinArr2 = false;
-            if(isJinArr1){
-                while(j<n){
-                    if(arr1[i] > arr1[j])
-                        swap(arr1, arr1, i, j);
-                    i++;j++;
-                }
-                j=0; isJinArr1 = false;
-            }  
-            if(!isIinArr2){
-                while(i < n && j<m){
-                    if(arr1[i] > arr2[j])
-                        swap(arr1, arr2, i, j);
-                    i++;j++;
-                }
-                i=0; isIinArr2 = true;
-            }
-            while(j<m){
-                if(arr2[i] > arr2[j])
-                    swap(arr2, arr2, i, j);
-                i++; j++;
-            }
-            
         }
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
     }
 }
