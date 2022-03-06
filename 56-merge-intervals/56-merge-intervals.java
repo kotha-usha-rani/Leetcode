@@ -1,6 +1,7 @@
 class Solution {
     public int[][] merge(int[][] arr) {
-        //Method 1: sort the array, find the intervals
+        //Method 1 : sort the array, for each intervals check for overlapping intervals -> tc = O(nlogn)+O(n^2)
+        //Method 2: sort the array, find the intervals
         Arrays.sort(arr, (a, b) -> Integer.compare(a[0], b[0]));
         int i=0, j, max, k=0;
         ArrayList<int[]> tempAns = new ArrayList<>();
@@ -15,6 +16,12 @@ class Solution {
             i = j+1;            
         }
         //int[][] ans = new int[tempAns.size()/2][2];
+        // for(i=0 ; i<tempAns.size() ; i+=2){
+        //     ans[k][0] = tempAns.get(i);
+        //     ans[k++][1] = tempAns.get(i+1);
+        // }
+        //return ans;
+        //can bew replaced with
         return tempAns.toArray(new int[tempAns.size()/2][2]);
     }
 }
