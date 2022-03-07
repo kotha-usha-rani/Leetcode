@@ -26,10 +26,9 @@ class Solution {
                         break;
                     }
                 }
-                reverse(nums, i+1, nums.length-1);
-                return;
+                break;
             }
         }
-        reverse(nums, 0, nums.length-1);
+        reverse(nums, i+1, nums.length-1);
     }
 }
