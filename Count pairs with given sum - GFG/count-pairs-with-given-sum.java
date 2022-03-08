@@ -42,6 +42,36 @@ class Solution {
         // return count;
         
         //method 2 : using hashmaps
+        // if(n==1 || k==1)
+        //     return 0;
+        // HashMap<Integer, Integer> map = new HashMap<>();
+        // int count =0 ;
+        // for(int i=0 ; i<n ; i++){
+        //     if(map.containsKey(arr[i]))
+        //         map.put(arr[i], map.get(arr[i])+1);
+        //     else
+        //         map.put(arr[i], 1);
+        // }
+        // for(int i=0 ; i<n ; i++){
+        //     int ele = k-arr[i];
+        //     if(map.containsKey(arr[i]) && map.containsKey(ele) && map.get(ele) > 0){
+        //         int temp = map.get(ele);
+        //         if(ele == arr[i]){
+        //             count += (temp-1);
+        //             map.put(ele, temp-1);
+        //         }
+        //         else{
+        //             count += (temp*map.get(arr[i]));
+        //             // map.put(arr[i], 0);
+        //             // map.put(ele, 0);
+        //             map.remove(arr[i]);
+        //             map.remove(ele);
+        //         }
+        //     }
+        // }
+        // return count;
+        
+        //Method 2 : shot code
         if(n==1 || k==1)
             return 0;
         HashMap<Integer, Integer> map = new HashMap<>();
@@ -53,22 +83,12 @@ class Solution {
                 map.put(arr[i], 1);
         }
         for(int i=0 ; i<n ; i++){
-            int ele = k-arr[i];
-            if(map.containsKey(arr[i]) && map.containsKey(ele) && map.get(ele) > 0){
-                int temp = map.get(ele);
-                if(ele == arr[i]){
-                    count += (temp-1);
-                    map.put(ele, temp-1);
-                }
-                else{
-                    count += (temp*map.get(arr[i]));
-                    // map.put(arr[i], 0);
-                    // map.put(ele, 0);
-                    map.remove(arr[i]);
-                    map.remove(ele);
-                }
+            if(map.get(k-arr[i]) != null){
+                count += map.get(k-arr[i]);
+                if(k-arr[i] == arr[i])
+                    count--;
             }
         }
-        return count;
+        return count/2;
     }
 }
