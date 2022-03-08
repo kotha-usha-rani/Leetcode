@@ -72,23 +72,38 @@ class Solution {
         // return count;
         
         //Method 2 : shot code
-        if(n==1 || k==1)
-            return 0;
+        // if(n==1 || k==1)
+        //     return 0;
+        // HashMap<Integer, Integer> map = new HashMap<>();
+        // int count =0 ;
+        // for(int i=0 ; i<n ; i++){
+        //     if(map.containsKey(arr[i]))
+        //         map.put(arr[i], map.get(arr[i])+1);
+        //     else
+        //         map.put(arr[i], 1);
+        // }
+        // for(int i=0 ; i<n ; i++){
+        //     if(map.get(k-arr[i]) != null){
+        //         count += map.get(k-arr[i]);
+        //         if(k-arr[i] == arr[i])
+        //             count--;
+        //     }
+        // }
+        // return count/2;
+        
+        //Method 3: hashmap using one loop
+        int count = 0;
         HashMap<Integer, Integer> map = new HashMap<>();
-        int count =0 ;
-        for(int i=0 ; i<n ; i++){
-            if(map.containsKey(arr[i]))
+        for(int i=0 ; i<arr.length ; i++){
+            if(map.get(k-arr[i]) != null){
+                count += map.get(k-arr[i]);
+            }
+            if(map.containsKey(arr[i])){
                 map.put(arr[i], map.get(arr[i])+1);
+            }
             else
                 map.put(arr[i], 1);
         }
-        for(int i=0 ; i<n ; i++){
-            if(map.get(k-arr[i]) != null){
-                count += map.get(k-arr[i]);
-                if(k-arr[i] == arr[i])
-                    count--;
-            }
-        }
-        return count/2;
+        return count;
     }
 }
