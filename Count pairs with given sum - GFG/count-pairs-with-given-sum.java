@@ -63,8 +63,10 @@ class Solution {
                 }
                 else{
                     count += (temp*map.get(arr[i]));
-                    map.put(arr[i], 0);
-                    map.put(ele, 0);
+                    // map.put(arr[i], 0);
+                    // map.put(ele, 0);
+                    map.remove(arr[i]);
+                    map.remove(ele);
                 }
             }
         }
