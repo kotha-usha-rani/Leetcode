@@ -54,8 +54,7 @@ class Solution {
         }
         for(int i=0 ; i<n ; i++){
             int ele = k-arr[i];
-            
-            if(map.containsKey(ele) && map.get(ele) > 0){
+            if(map.containsKey(arr[i]) && map.containsKey(ele) && map.get(ele) > 0){
                 int temp = map.get(ele);
                 if(ele == arr[i]){
                     count += (temp-1);
