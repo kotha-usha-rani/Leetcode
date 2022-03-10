@@ -60,10 +60,31 @@ class Solution {
         return sort(firstHalf, secondHalf);
     }
     public ListNode mergeKLists(ListNode[] lists) {
-        if(lists.length == 0)
+         if(lists.length == 0)
             return null;
         if(lists.length == 1)
             return lists[0];
-        return merge(lists, 0, lists.length-1);
+        //Method 1: merge sort
+        //return merge(lists, 0, lists.length-1);
+        
+        //method 2: heap
+        PriorityQueue<ListNode> heap = new PriorityQueue<ListNode>((a,b) -> a.val - b.val);
+        
+        for(int i=0 ; i<lists.length ; i++){
+            if(lists[i] != null)
+                heap.add(lists[i]);
+        }
+        ListNode head = new ListNode(), temp;
+        temp = head;
+        while(!heap.isEmpty()){
+            ListNode t = heap.poll();
+            temp.next = t ;
+            temp = temp.next;
+            if(t.next != null){
+                heap.add(t.next);
+            }
+            t = t.next;            
+        }
+        return head.next;
     }
 }
