@@ -9,47 +9,89 @@
  * }
  */
 class Solution {
-    public ListNode reverse(ListNode head, ListNode end){
-        if(head == end)
+    public ListNode reverse(ListNode head){
+        if(head == null || head.next == null)
             return head;
-        ListNode ans = reverse(head.next, end);
+        ListNode newHead = reverse(head.next);
         head.next.next = head;
         head.next = null;
-        return ans;
-    }
-    public ListNode reverseKGroup(ListNode head, int k) {
-        
-        if(head == null || head.next == null || k==1)
-            return head;
-        
-        //Method 1 iterative, reverse k nodes at a time
-        ListNode prev = head;
-        ListNode temp = head;
-        ListNode temp2 = head;
-        ListNode t = null;
-        ListNode revHead = null;
-        int count = 0;
-        while(temp != null){
-            count = 1;
-            temp2 = temp;
-            while(temp2.next != null && count < k){
-                count++;
-                temp2 = temp2.next;                
-            }
-            if(temp2.next == null && count < k)
-                return head;
-            t = temp2.next ;
-            revHead = reverse(temp, temp2);
-            if(temp == head)
-               head = revHead;
-            else
-                prev.next = revHead ;
-            temp.next = t ;
-            prev = temp;
-            temp = t;            
-        }
         return head;
     }
+    public ListNode reverseKGroup(ListNode head, int k) {
+        // ListNode temp, prevHead = head, next, newHead;
+        // temp = head;
+        // int count;
+        // while(temp != null){
+        //     count = 1;
+        //     while(count < k && temp != null){
+        //         count++;
+        //         temp = temp.next;
+        //     }
+        //     if(count < k-1)
+        //         return newHead;
+        //     next = temp.next;
+        //     temp.next = null;
+        //     ListNode ans = reverse(temp);
+        //     if(prevhead == head){
+        //         newHead = ans;
+        //         prevHead = ans;
+        //     }
+        //     else
+        //         prevHead.next = ans;
+        // }
+        
+        ListNode temp = head, currHead=null, newHead = head, ptr=null, prevHead;
+        int t=0;
+        Stack<ListNode> stack = new Stack<ListNode>();
+        while(temp != null){
+            t = 0;
+            while(temp != null && t<k){
+                stack.push(temp);
+                temp = temp.next;
+                stack.peek().next = null;
+                t++;
+            }
+            if(t<k){
+                temp = stack.pop();
+                while(!stack.isEmpty()){
+                    stack.peek().next = temp;
+                    temp = stack.pop();
+                }
+                if(currHead != null)
+                    ptr.next = temp;
+                
+                return newHead;
+            }
+            
+            currHead = stack.pop();
+            if(ptr != null)
+                ptr.next = currHead;
+            ptr = currHead;
+            while(!stack.isEmpty()){
+                ptr.next = stack.pop();
+                ptr = ptr.next;
+            }
+            ptr.next = temp;
+            if(ptr == head){
+                newHead = currHead;
+            }
+        }
+        return newHead;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
