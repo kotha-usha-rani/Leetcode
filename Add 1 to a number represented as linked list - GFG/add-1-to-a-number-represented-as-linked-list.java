@@ -59,67 +59,24 @@ class Node{
 
 class Solution
 {
-    public static int solution(Node head){
-        if(head == null){
+    public static int addRem(Node head){
+        if(head == null)
             return 1;
-        }
-        int rem = solution(head.next);
-        int data = head.data+rem;
-        head.data = data%10;
-        if(data == 10)
-            return 1;
-        return 0;
+        int rem = addRem(head.next);
+        int sum =  (head.data + rem);
+        head.data = sum%10;
+        return sum/10;
     }
-    
     public static Node addOne(Node head) 
     { 
         if(head == null)
             return null;
-        if(head.next == null){
-            head.data = head.data+1;
-            return head;
-        }
-        //Method 1 recursive
-        //   int temp = head.data;
-        //   int ans = solution(head);
-        //   if(ans != 0)
-        //     head.data = temp+ans;
-        //   return head;
-    
-        //Method 2 using arraylist to store data
-        ArrayList<Integer> arr = new ArrayList<>();
-        Node temp = head;
-        while(temp != null){
-            arr.add(temp.data);
-            temp = temp.next ;
-        }
-        int rem = 1;
-        for(int i=arr.size()-1 ; i>=0 ; i--){
-            int data = arr.get(i)+rem;
-            arr.set(i, data%10);
-            if(data != 10)
-                rem=0;
-        }
-        if(rem == 1){
-            arr.set(0, head.data+rem);
-        }
-        temp = head;
-        int i=0;
-        while(temp != null){
-            temp.data = arr.get(i);
-            temp = temp.next;
-            i++;
+        int rem = addRem(head);
+        if(rem > 0){
+            Node newNode = new Node(rem);
+            newNode.next = head;
+            head = newNode;
         }
         return head;
     }
 }
-
-
-
-
-
-
-
-
-
-
