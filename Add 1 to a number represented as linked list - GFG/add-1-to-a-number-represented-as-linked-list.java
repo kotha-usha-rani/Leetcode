@@ -59,6 +59,14 @@ class Node{
 
 class Solution
 {
+    public static Node reverse(Node head){
+        if(head == null || head.next == null)
+            return head;
+        Node ans = reverse(head.next);
+        head.next.next = head;
+        head.next = null;
+        return ans;
+    }
     public static int addRem(Node head){
         if(head == null)
             return 1;
@@ -69,10 +77,28 @@ class Solution
     }
     public static Node addOne(Node head) 
     { 
-        if(head == null)
-            return null;
-        int rem = addRem(head);
-        if(rem > 0){
+    //     if(head == null)
+    //         return null;
+    //     int rem = addRem(head);
+    //     if(rem > 0){
+    //         Node newNode = new Node(rem);
+    //         newNode.next = head;
+    //         head = newNode;
+    //     }
+    //     return head;
+    
+    //reverse the list
+        head = reverse(head);
+        Node temp = head;
+        int rem = 1, data = 0;
+        while(temp != null){
+            data = (temp.data+rem);
+            temp.data = data%10;
+            rem = data/10;
+            temp = temp.next;
+        }
+        head = reverse(head);
+        if(rem != 0){
             Node newNode = new Node(rem);
             newNode.next = head;
             head = newNode;
