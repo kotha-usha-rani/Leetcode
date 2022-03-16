@@ -35,29 +35,47 @@ class Solution
     int celebrity(int M[][], int n)
     {
     	//brute force
-    	int count;
-    	for(int i=0 ; i<n ; i++){
-    	    count = 0;
-    	    if(i!= 0 && M[0][i] == 0)
-    	        continue;
-    	    for(int j=0 ; j<n ; j++){
-    	        if(i==j)
-    	            continue;
-    	        if(M[j][i] != 1)
-    	            break;
-    	        else{
-    	            if(M[i][j] == 1){
-    	                if(j==i+1)
-    	                    i+=1;
-    	                break;
-    	            }
-    	            else
-    	                count++;
-    	        }
-    	    }
-    	    if(count == n-1)
-    	        return i;
-    	}
-    	return -1;
+    // 	int count;
+    // 	for(int i=0 ; i<n ; i++){
+    // 	    count = 0;
+    // 	    if(i!= 0 && M[0][i] == 0)
+    // 	        continue;
+    // 	    for(int j=0 ; j<n ; j++){
+    // 	        if(i==j)
+    // 	            continue;
+    // 	        if(M[j][i] != 1)
+    // 	            break;
+    // 	        else{
+    // 	            if(M[i][j] == 1){
+    // 	                if(j==i+1)
+    // 	                    i+=1;
+    // 	                break;
+    // 	            }
+    // 	            else
+    // 	                count++;
+    // 	        }
+    // 	    }
+    // 	    if(count == n-1)
+    // 	        return i;
+    // 	}
+    // 	return -1;
+    
+    //using count array
+    int[] count = new int[n];
+        for(int i=0 ; i<n ; i++){
+            if(i!=0 && M[0][i] == 0){
+                count[i] = 0 ;
+                continue;
+            }
+            for(int j=0 ; j<n ; j++){
+                if(M[j][i] == 1 && M[i][j] != 1)
+                    count[i]++;
+            }
+        }
+        for(int i=0 ; i<n ; i++){
+            if(count[i] == n-1)
+                return i;
+        }
+        return -1;
     }
 }
