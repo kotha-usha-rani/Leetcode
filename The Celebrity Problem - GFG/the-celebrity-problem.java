@@ -38,6 +38,8 @@ class Solution
     	int count;
     	for(int i=0 ; i<n ; i++){
     	    count = 0;
+    	    if(i!= 0 && M[0][i] == 0)
+    	        continue;
     	    for(int j=0 ; j<n ; j++){
     	        if(i==j)
     	            continue;
