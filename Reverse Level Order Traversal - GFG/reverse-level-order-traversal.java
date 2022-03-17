@@ -127,33 +127,54 @@ class Tree
 {
     public ArrayList<Integer> reverseLevelOrder(Node node) 
     {
+        // ArrayList<Node> list = new ArrayList<>();
+        // int i=0;
+        // list.add(node);
+        // list.add(null);
+        // while(i<list.size()){
+        //     Node temp = list.get(i);
+        //     if(temp != null){
+        //         if(temp.left != null)
+        //             list.add(temp.left);
+        //         if(temp.right != null)
+        //             list.add(temp.right);
+        //     }
+        //     else{
+        //         if(i+1 == list.size())
+        //             break;
+        //         list.add(null);
+        //     }
+        //     i++;
+        // }
+        // int k=0;
+        // ArrayList<Integer> ans = new ArrayList<>();
+        // for(i=0 ; i<list.size() ; i++){
+        //     k=0;
+        //     while(list.get(i) != null){
+        //         ans.add(k,list.get(i).data);
+        //         k++;i++;
+        //     }
+        // }
+        // return ans;
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        if(node == null)
+            return ans;
         ArrayList<Node> list = new ArrayList<>();
-        int i=0;
         list.add(node);
-        list.add(null);
-        while(i<list.size()){
+        int i=0;
+        while(i != list.size()){
             Node temp = list.get(i);
             if(temp != null){
-                if(temp.left != null)
-                    list.add(temp.left);
                 if(temp.right != null)
                     list.add(temp.right);
-            }
-            else{
-                if(i+1 == list.size())
-                    break;
-                list.add(null);
+                if(temp.left != null)
+                    list.add(temp.left);
             }
             i++;
         }
-        int k=0;
-        ArrayList<Integer> ans = new ArrayList<>();
         for(i=0 ; i<list.size() ; i++){
-            k=0;
-            while(list.get(i) != null){
-                ans.add(k,list.get(i).data);
-                k++;i++;
-            }
+            ans.add(0, list.get(i).data);
         }
         return ans;
     }
