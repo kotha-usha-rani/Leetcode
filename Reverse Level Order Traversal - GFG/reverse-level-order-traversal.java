@@ -157,24 +157,39 @@ class Tree
         // }
         // return ans;
         
+        // ArrayList<Integer> ans = new ArrayList<>();
+        // if(node == null)
+        //     return ans;
+        // ArrayList<Node> list = new ArrayList<>();
+        // list.add(node);
+        // int i=0;
+        // while(i != list.size()){
+        //     Node temp = list.get(i);
+        //     if(temp != null){
+        //         if(temp.right != null)
+        //             list.add(temp.right);
+        //         if(temp.left != null)
+        //             list.add(temp.left);
+        //     }
+        //     i++;
+        // }
+        // for(i=0 ; i<list.size() ; i++){
+        //     ans.add(0, list.get(i).data);
+        // }
+        // return ans;
+        
+        
+        //Stack and queue
+        Queue<Node> queue = new LinkedList<>();
         ArrayList<Integer> ans = new ArrayList<>();
-        if(node == null)
-            return ans;
-        ArrayList<Node> list = new ArrayList<>();
-        list.add(node);
-        int i=0;
-        while(i != list.size()){
-            Node temp = list.get(i);
-            if(temp != null){
-                if(temp.right != null)
-                    list.add(temp.right);
-                if(temp.left != null)
-                    list.add(temp.left);
-            }
-            i++;
-        }
-        for(i=0 ; i<list.size() ; i++){
-            ans.add(0, list.get(i).data);
+        queue.add(node);
+        while(!queue.isEmpty()){
+            Node temp = queue.remove();
+            ans.add(0,temp.data);
+            if(temp.right != null)
+                queue.add(temp.right);
+            if(temp.left != null)
+                queue.add(temp.left);
         }
         return ans;
     }
