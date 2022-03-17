@@ -17,25 +17,32 @@ class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
         if(root == null)
             return new ArrayList<>();
-        Stack<TreeNode> stack = new Stack<>();
-        List<Integer> ans = new ArrayList<>();
-        stack.push(root);
-        while(!stack.isEmpty()){
-            TreeNode temp = stack.peek();
-            while(temp.left != null){
-                stack.push(temp.left);
-                temp = temp.left;
-            }
-            while(!stack.isEmpty()){
-                if(stack.peek().right == null)
-                    ans.add(stack.pop().val);
-                else{
-                    ans.add(stack.peek().val);
-                    stack.push(stack.pop().right);
-                    break;
-                }                    
-            }
-        }
+        // iterative
+        // Stack<TreeNode> stack = new Stack<>();
+        // List<Integer> ans = new ArrayList<>();
+        // stack.push(root);
+        // while(!stack.isEmpty()){
+        //     TreeNode temp = stack.peek();
+        //     while(temp.left != null){
+        //         stack.push(temp.left);
+        //         temp = temp.left;
+        //     }
+        //     while(!stack.isEmpty()){
+        //         if(stack.peek().right == null)
+        //             ans.add(stack.pop().val);
+        //         else{
+        //             ans.add(stack.peek().val);
+        //             stack.push(stack.pop().right);
+        //             break;
+        //         }                    
+        //     }
+        //}
+        //return ans;
+        
+        //recursive
+        List<Integer> ans = inorderTraversal(root.left);
+        ans.add(root.val);
+        ans.addAll(inorderTraversal(root.right));
         return ans;
     }
 }
