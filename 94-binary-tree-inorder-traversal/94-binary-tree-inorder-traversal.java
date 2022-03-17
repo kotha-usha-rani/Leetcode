@@ -18,31 +18,30 @@ class Solution {
         if(root == null)
             return new ArrayList<>();
         // iterative
-        // Stack<TreeNode> stack = new Stack<>();
-        // List<Integer> ans = new ArrayList<>();
-        // stack.push(root);
-        // while(!stack.isEmpty()){
-        //     TreeNode temp = stack.peek();
-        //     while(temp.left != null){
-        //         stack.push(temp.left);
-        //         temp = temp.left;
-        //     }
-        //     while(!stack.isEmpty()){
-        //         if(stack.peek().right == null)
-        //             ans.add(stack.pop().val);
-        //         else{
-        //             ans.add(stack.peek().val);
-        //             stack.push(stack.pop().right);
-        //             break;
-        //         }                    
-        //     }
-        //}
-        //return ans;
+        Stack<TreeNode> stack = new Stack<>();
+        List<Integer> ans = new ArrayList<>();
+        stack.push(root);
+        while(!stack.isEmpty()){
+            TreeNode temp = stack.peek();
+            while(temp.left != null){
+                stack.push(temp.left);
+                temp = temp.left;
+            }
+            while(!stack.isEmpty()){
+                ans.add(stack.peek().val);
+                if(stack.peek().right != null){
+                    stack.push(stack.pop().right);
+                    break;
+                }
+                stack.pop();
+            }
+        }
+        return ans;
         
         //recursive
-        List<Integer> ans = inorderTraversal(root.left);
-        ans.add(root.val);
-        ans.addAll(inorderTraversal(root.right));
-        return ans;
+        // List<Integer> ans = inorderTraversal(root.left);
+        // ans.add(root.val);
+        // ans.addAll(inorderTraversal(root.right));
+        // return ans;
     }
 }
