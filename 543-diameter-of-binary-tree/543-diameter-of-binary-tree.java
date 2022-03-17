@@ -25,12 +25,12 @@ class Solution {
         return 1 + Math.max(left, right);
     }
     
-    public Triplet diaUsingTriplet(TreeNode root){
+    public Pair diaUsingPair(TreeNode root){
         if(root == null)
-            return new Triplet(0,0);
-        Triplet left = diaUsingTriplet(root.left);
-        Triplet right = diaUsingTriplet(root.right);
-        return new Triplet(Math.max(left.height + right.height + 1, Math.max(left.maxDia, right.maxDia)),                              1 + Math.max(left.height, right.height));
+            return new Pair(0,0);
+        Pair left = diaUsingPair(root.left);
+        Pair right = diaUsingPair(root.right);
+        return new Pair(Math.max(left.height + right.height + 1, Math.max(left.maxDia, right.maxDia)),                              1 + Math.max(left.height, right.height));
         
     }
     public int diameterOfBinaryTree(TreeNode root) {
@@ -39,16 +39,16 @@ class Solution {
         // int height = finddiameter(root);
         // return dia-1;
         
-        //using triplet class
+        //using Pair class
         if(root == null)
             return 0;
-        return diaUsingTriplet(root).maxDia-1;
+        return diaUsingPair(root).maxDia-1;
     }
 }
-class Triplet{
+class Pair{
     int maxDia;
     int height;
-    Triplet(int maxDia, int height){
+    Pair(int maxDia, int height){
         this.maxDia = maxDia;
         this.height = height;
     }
