@@ -123,71 +123,97 @@ class Tree
 {
     //Function to return list containing elements of left view of binary tree.
     
-    Pair getPathHeight(Node root){
-        Pair newPair = new Pair();
-        if(root == null){
-            newPair.list = new ArrayList<>();
-            newPair.height = 0;
-            return newPair;
-        }
-        if(root.left == null && root.right == null){
-            newPair.list.add(root);
-            newPair.height = 1;
-            return newPair;
-        }
+    // Pair getPathHeight(Node root){
+    //     Pair newPair = new Pair();
+    //     if(root == null){
+    //         newPair.list = new ArrayList<>();
+    //         newPair.height = 0;
+    //         return newPair;
+    //     }
+    //     if(root.left == null && root.right == null){
+    //         newPair.list.add(root);
+    //         newPair.height = 1;
+    //         return newPair;
+    //     }
         
-        Pair left = getPathHeight(root.left);
-        Pair right = getPathHeight(root.right);
-        if(left.height >= right.height){
-            left.list.add(0, root);
-            left.height += 1;
-            return left;
-        }
-        else{
-            right.list.add(0, root);
-            right.height += 1;
-            return right;
-        }
+    //     Pair left = getPathHeight(root.left);
+    //     Pair right = getPathHeight(root.right);
+    //     if(left.height >= right.height){
+    //         left.list.add(0, root);
+    //         left.height += 1;
+    //         return left;
+    //     }
+    //     else{
+    //         right.list.add(0, root);
+    //         right.height += 1;
+    //         return right;
+    //     }
         
-    }
+    // }
     ArrayList<Integer> leftView(Node root)
     {
       //find height
       
-      if(root == null)
-        return new ArrayList<>();
+    //   if(root == null)
+    //     return new ArrayList<>();
         
+    //     ArrayList<Integer> ans = new ArrayList<>();
+    //     Node curr = root, prev = null;
+    //     int count = 0;
+    //     while(curr != null){
+    //         ans.add(curr.data);
+    //         count++;
+    //         prev = curr;
+    //         curr = curr.left;
+    //     }
+    //     if(prev.right != null){
+    //         ans.add(prev.right.data);
+    //         count++;
+    //     }
+        
+    //     Pair pathHeight = getPathHeight(root);
+    //     int diff = pathHeight.height - count;
+    //     if(diff <= 0)
+    //         return ans;
+    //     for(int i=count ; i< pathHeight.list.size() ; i++)
+    //         ans.add(pathHeight.list.get(i).data);
+    //     return ans;
+    
+        //level order traversal
+        if(root == null)
+            return new ArrayList<>();
+        Queue<Node> queue = new LinkedList<>();
         ArrayList<Integer> ans = new ArrayList<>();
-        Node curr = root, prev = null;
-        int count = 0;
-        while(curr != null){
-            ans.add(curr.data);
-            count++;
-            prev = curr;
-            curr = curr.left;
+        queue.add(null);
+        queue.add(root);
+        while(!queue.isEmpty()){
+            Node curr = queue.remove();
+            if(curr != null){
+                if(curr.left != null)
+                    queue.add(curr.left);
+                if(curr.right != null)
+                    queue.add(curr.right);
+            }
+            else{
+                if(!queue.isEmpty()){
+                    ans.add(queue.peek().data);
+                    queue.add(null);
+                }
+                else
+                    break;
+            }
         }
-        if(prev.right != null){
-            ans.add(prev.right.data);
-            count++;
-        }
-        
-        Pair pathHeight = getPathHeight(root);
-        int diff = pathHeight.height - count;
-        if(diff <= 0)
-            return ans;
-        for(int i=count ; i< pathHeight.list.size() ; i++)
-            ans.add(pathHeight.list.get(i).data);
         return ans;
     }
 }
-class Pair{
-    ArrayList<Node> list;
-    int height;
-    Pair(){
-        list = new ArrayList<>();
-        this.height = 0;
-    }
-}
+// class Pair{
+//     ArrayList<Node> list;
+//     int height;
+//     Pair(){
+//         list = new ArrayList<>();
+//         this.height = 0;
+//     }
+// }
 
 
 
