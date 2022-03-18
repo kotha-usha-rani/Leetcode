@@ -137,14 +137,10 @@ class Solution
              //line, node//
         Queue<Pair> queue = new LinkedList<>();
                //line, node.data//
-        HashMap<Integer, Integer> map = new HashMap<>();
+        Map<Integer, Integer> map = new TreeMap<>();
         queue.add(new Pair(0, root));
-        int min = (int)Math.pow(10,5) + 1;
-        int max = -1*min;
         while(!queue.isEmpty()){
             Pair curr = queue.remove();
-            min = Math.min(curr.line, min);
-            max = Math.max(curr.line, max);
             if(!map.containsKey(curr.line))
                 map.put(curr.line, curr.node.data);
             if(curr.node.left != null)
@@ -152,9 +148,8 @@ class Solution
             if(curr.node.right != null)
                 queue.add(new Pair(curr.line+1, curr.node.right));
         }
-        for(int i=min ; i<=max ; i++){
-            if(map.containsKey(i))
-                ans.add(map.get(i));
+        for(Map.Entry<Integer, Integer> mapEle : map.entrySet()){
+            ans.add(mapEle.getValue());
         }
         return ans;
     }
