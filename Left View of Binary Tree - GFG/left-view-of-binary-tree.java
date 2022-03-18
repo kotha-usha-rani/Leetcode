@@ -150,6 +150,16 @@ class Tree
     //     }
         
     // }
+    
+    
+    void getView(Node root, int level, ArrayList<Integer> ans){
+        if(root == null)
+            return;
+        if(ans.size() < level)
+            ans.add(root.data);
+        getView(root.left, level+1, ans);
+        getView(root.right, level+1, ans);
+    }
     ArrayList<Integer> leftView(Node root)
     {
       //find height
@@ -180,30 +190,38 @@ class Tree
     //     return ans;
     
         //level order traversal
-        if(root == null)
-            return new ArrayList<>();
-        Queue<Node> queue = new LinkedList<>();
+        
+        // if(root == null)
+        //     return new ArrayList<>();
+        // Queue<Node> queue = new LinkedList<>();
+        // ArrayList<Integer> ans = new ArrayList<>();
+        // queue.add(null);
+        // queue.add(root);
+        // while(!queue.isEmpty()){
+        //     Node curr = queue.remove();
+        //     if(curr != null){
+        //         if(curr.left != null)
+        //             queue.add(curr.left);
+        //         if(curr.right != null)
+        //             queue.add(curr.right);
+        //     }
+        //     else{
+        //         if(!queue.isEmpty()){
+        //             ans.add(queue.peek().data);
+        //             queue.add(null);
+        //         }
+        //         else
+        //             break;
+        //     }
+        // }
+        // return ans;
+        
         ArrayList<Integer> ans = new ArrayList<>();
-        queue.add(null);
-        queue.add(root);
-        while(!queue.isEmpty()){
-            Node curr = queue.remove();
-            if(curr != null){
-                if(curr.left != null)
-                    queue.add(curr.left);
-                if(curr.right != null)
-                    queue.add(curr.right);
-            }
-            else{
-                if(!queue.isEmpty()){
-                    ans.add(queue.peek().data);
-                    queue.add(null);
-                }
-                else
-                    break;
-            }
-        }
+        if(root == null)
+            return ans;
+        getView(root, 1, ans);
         return ans;
+        
     }
 }
 // class Pair{
