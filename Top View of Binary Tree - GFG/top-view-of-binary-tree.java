@@ -139,8 +139,8 @@ class Solution
                //line, node.data//
         HashMap<Integer, Integer> map = new HashMap<>();
         queue.add(new Pair(0, root));
-        int max = (int)Math.pow(10,5) + 1;
-        int min = -1*max;
+        int min = (int)Math.pow(10,5) + 1;
+        int max = -1*min;
         while(!queue.isEmpty()){
             Pair curr = queue.remove();
             min = Math.min(curr.line, min);
