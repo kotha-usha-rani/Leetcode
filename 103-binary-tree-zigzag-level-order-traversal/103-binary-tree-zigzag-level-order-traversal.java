@@ -119,7 +119,38 @@ class Solution {
         
         //preorder recursive
         
-        getZigZag(root, 0, ans);
+        // getZigZag(root, 0, ans);
+        // return ans;
+        
+        //iterative level order
+        
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        ArrayList<Integer> temp ;
+        Boolean flag = false;
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            temp = new ArrayList<>();
+            for(int i=0 ; i<size ; i++){
+                TreeNode curr = queue.remove();
+                if(!flag)
+                    temp.add(curr.val);
+                else
+                    temp.add(0, curr.val);
+                if(curr.left != null)
+                    queue.add(curr.left);
+                if(curr.right != null)
+                    queue.add(curr.right);
+            }
+            ans.add(temp);
+            flag = !flag;
+        }
         return ans;
     }
 }
+
+
+
+
+
+
