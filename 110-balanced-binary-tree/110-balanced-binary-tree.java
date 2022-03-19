@@ -25,8 +25,24 @@ class Solution {
         ans.isBal = left.isBal && right.isBal && Math.abs(left.h-right.h) <= 1 ;
         return ans;
     }
+    
+    public boolean isBalanced = true;
+    public int findHeight(TreeNode root){
+        if(root == null)
+            return 0;
+        int left = findHeight(root.left);
+        int right = findHeight(root.right);
+        if(Math.abs(left-right) > 1)
+            isBalanced = false;
+        return 1 + Math.max(left, right);
+    }
     public boolean isBalanced(TreeNode root) {
-        return checkForBalance(root).isBal;
+        //using triplet class
+        //return checkForBalance(root).isBal;
+        
+        //using public variable isBalanced
+        int height = findHeight(root);
+        return isBalanced;
     }
 }
 class Triplet{
