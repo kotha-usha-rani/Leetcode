@@ -14,33 +14,21 @@
  * }
  */
 class Solution {
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    public void solution(TreeNode root, int level, List<List<Integer>> ans){
         if(root == null)
-            return new ArrayList<>();
-        Queue<TreeNode> queue = new LinkedList<>();
+            return ;
+        if(ans.size() <= level)
+            ans.add(new ArrayList<>());
+        ans.get(level).add(root.val);
+        
+        solution(root.left, level+1, ans);
+        solution(root.right, level+1, ans);
+        
+    }
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        //dfs
         List<List<Integer>> ans = new ArrayList<>();
-        List<Integer> list = new ArrayList<>();
-        queue.add(root);
-        queue.add(null);
-        while(!queue.isEmpty()){
-            TreeNode temp = queue.remove();
-            if(temp != null){
-                list.add(temp.val);
-                if(temp.left != null)
-                    queue.add(temp.left);
-                if(temp.right != null)
-                    queue.add(temp.right);
-            }
-            else{
-                if(list.size() != 0){
-                    ans.add(list);
-                    list = new ArrayList<>();
-                    queue.add(null);
-                }
-                else
-                    break;
-            }
-        }
+        solution(root, 0, ans);
         return ans;
     }
 }
