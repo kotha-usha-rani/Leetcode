@@ -31,9 +31,9 @@ class Solution {
         List<List<Integer>> ans = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
-        ans.add(new ArrayList<>());
         while(!queue.isEmpty()){
             int size = queue.size();
+            ans.add(0, new ArrayList<>());
             for(int i=0 ; i<size ; i++){
                 TreeNode temp = queue.remove();
                 if(temp != null){
@@ -44,8 +44,7 @@ class Solution {
                         queue.add(temp.right);
                 }
             }
-            if(!queue.isEmpty())
-                ans.add(0, new ArrayList<>());
+                
         }
         return ans;
         
