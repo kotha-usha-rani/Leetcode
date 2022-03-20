@@ -28,39 +28,41 @@ class Solution {
         if(root == null)
             return new ArrayList<>();
         
-        // List<List<Integer>> ans = new ArrayList<>();
-        // Queue<TreeNode> queue = new LinkedList<>();
-        // queue.add(root);
-        // queue.add(null);
-        // ans.add(new ArrayList<>());
-        // while(!queue.isEmpty()){
-        //     TreeNode temp = queue.remove();
-        //     if(temp != null){
-        //         ans.get(0).add(temp.val);
-        //         if(temp.left != null)
-        //             queue.add(temp.left);
-        //         if(temp.right != null)
-        //             queue.add(temp.right);
-        //     }
-        //     else{
-        //         if(queue.isEmpty())
-        //             break;
-        //         queue.add(null);
-        //         ans.add(0, new ArrayList<>());
-        //     }
-        // }
-        // return ans;
+        List<List<Integer>> ans = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        ans.add(new ArrayList<>());
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            for(int i=0 ; i<size ; i++){
+                TreeNode temp = queue.remove();
+                if(temp != null){
+                    ans.get(0).add(temp.val);
+                    if(temp.left != null)
+                        queue.add(temp.left);
+                    if(temp.right != null)
+                        queue.add(temp.right);
+                }
+            }
+            if(!queue.isEmpty())
+                ans.add(0, new ArrayList<>());
+        }
+        return ans;
         
         //dfs
-        List<List<Integer>> ans= new ArrayList<>();
-        solution(root, 0, ans);
+        
+        // List<List<Integer>> ans= new ArrayList<>();
+        // solution(root, 0, ans);
         // List<List<Integer>> fans= new ArrayList<>();
         // for(int i=ans.size()-1 ; i>=0 ; i--){
         //     fans.add(ans.get(i));
         // }
         // return fans;
-        Collections.reverse(ans);
-        return ans;
+        
+        //or
+             
+        // Collections.reverse(ans);
+        // return ans;
     }
 }
 
