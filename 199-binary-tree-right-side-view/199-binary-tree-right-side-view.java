@@ -26,6 +26,8 @@ class Solution {
         return currLevel;
     }
     public List<Integer> rightSideView(TreeNode root) {
+        if(root == null)
+            return new ArrayList<>();
         List<Integer> ans = new ArrayList<>();
         int currlevel = solution(root, 1, 0, ans);
         return ans;
