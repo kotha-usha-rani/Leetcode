@@ -54,11 +54,13 @@ class Solution {
         //dfs
         List<List<Integer>> ans= new ArrayList<>();
         solution(root, 0, ans);
-        List<List<Integer>> fans= new ArrayList<>();
-        for(int i=ans.size()-1 ; i>=0 ; i--){
-            fans.add(ans.get(i));
-        }
-        return fans;
+        // List<List<Integer>> fans= new ArrayList<>();
+        // for(int i=ans.size()-1 ; i>=0 ; i--){
+        //     fans.add(ans.get(i));
+        // }
+        // return fans;
+        Collections.reverse(ans);
+        return ans;
     }
 }
 
