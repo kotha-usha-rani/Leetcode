@@ -14,20 +14,20 @@
  * }
  */
 class Solution {
-    
-    public void getView(TreeNode root, int level, List<Integer> ans){
+     int solution(TreeNode root, int level, int currLevel, List<Integer> ans){
         if(root == null)
-            return;
-        if(level > ans.size())
+            return currLevel;
+        if(currLevel < level){
             ans.add(root.val);
-        getView(root.right, level+1, ans);
-        getView(root.left, level+1, ans);
+            currLevel = level;
+        }
+        currLevel = solution(root.right, level+1, currLevel, ans);
+        currLevel = solution(root.left, level+1, currLevel, ans);
+        return currLevel;
     }
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> ans = new ArrayList<>();
-        if(root == null)
-            return ans;
-        getView(root, 1, ans);
+        int currlevel = solution(root, 1, 0, ans);
         return ans;
     }
 }
