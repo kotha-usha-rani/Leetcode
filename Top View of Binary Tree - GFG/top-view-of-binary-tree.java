@@ -127,48 +127,64 @@ class Solution
 {
     //Function to return a list of nodes visible from the top view 
     //from left to right in Binary Tree.
+    
+    static void solution(Node root, int dist, int level, Map<Integer, Pair> map){
+        if(root == null)
+           return ;
+        if(!map.containsKey(dist) || map.get(dist).level > level)
+            map.put(dist, new Pair(root.data, level));
+        solution(root.left, dist-1, level+1, map);
+        solution(root.right, dist+1, level+1, map);
+    }
+    
     static ArrayList<Integer> topView(Node root)
     {
-        // hashmap and queue
-        
-        ArrayList<Integer> ans = new ArrayList<>();
         if(root == null)
-            return ans;
-             //line, node//
-        Queue<Pair> queue = new LinkedList<>();
-               //line, node.data//
-        Map<Integer, Integer> map = new TreeMap<>();
-        queue.add(new Pair(0, root));
+            return new ArrayList<>();
+        // Map<Integer, Pair> map = new TreeMap<>();
+        // solution(root, 0, 0, map);
+        // ArrayList<Integer> ans = new ArrayList<>();
+        // for(Map.Entry<Integer, Pair> mapEle : map.entrySet())
+        //     ans.add(mapEle.getValue().nodeData);
+        // return ans;
+        
+        Queue<Pairr> queue = new LinkedList<>();
+        ArrayList<Integer> ans = new ArrayList<>();
+        int low = Integer.MAX_VALUE;
+        int high = 0;
+        queue.add(new Pairr(root, 0));
         while(!queue.isEmpty()){
-            Pair curr = queue.remove();
-            if(!map.containsKey(curr.line))
-                map.put(curr.line, curr.node.data);
-            if(curr.node.left != null)
-                queue.add(new Pair(curr.line-1, curr.node.left));
-            if(curr.node.right != null)
-                queue.add(new Pair(curr.line+1, curr.node.right));
-        }
-        for(Map.Entry<Integer, Integer> mapEle : map.entrySet()){
-            ans.add(mapEle.getValue());
+            Pairr temp = queue.remove();
+            if(temp.dist < low){
+                ans.add(0,temp.node.data);
+                low = temp.dist;
+            }
+            else if(temp.dist > high){
+                ans.add(temp.node.data);
+                high = temp.dist;
+            }
+            if(temp.node.left != null)
+                queue.add(new Pairr(temp.node.left, temp.dist-1));
+            if(temp.node.right != null)
+                queue.add(new Pairr(temp.node.right, temp.dist+1));
         }
         return ans;
     }
 }
 class Pair{
-    int line;
-    Node node;
-    Pair(int line, Node node){
-        this.line = line;
-        this.node = node;
+    int nodeData;
+    int level;
+    Pair(int nodeData, int level){
+        this.nodeData = nodeData;
+        this.level = level;
     }
 }
 
-
-
-
-
-
-
-
-
-
+class Pairr{
+    Node node;
+    int dist;
+    Pairr(Node node, int dist){
+        this.node = node;
+        this.dist = dist;
+    }
+}
