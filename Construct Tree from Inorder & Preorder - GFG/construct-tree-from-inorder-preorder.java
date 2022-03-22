@@ -65,9 +65,9 @@ class Solution
     public static Node solution(int inorder[], int s1, int e1, int preorder[], int s2, int e2){
         if(s1 > e1 || s2 > e2)
             return null;
-        if(s1 == e1 && s2 == e2)
-            return new Node(preorder[s2]);
         Node root = new Node(preorder[s2]);
+        if(s1 == e1)
+            return root;
         int index = findRootIndex(inorder, s1, e1, root.data);
         root.left = solution(inorder, s1, index-1, preorder, s2+1, s2+index-s1);
         root.right = solution(inorder, index+1, e1, preorder, s2+index-s1+1, e2);
