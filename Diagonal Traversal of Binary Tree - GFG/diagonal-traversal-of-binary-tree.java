@@ -123,49 +123,29 @@ class Node{
 }*/
 class Tree
 {
+    public void solution(Node root, int dist, Map<Integer, List<Integer>> map){
+        if(root == null)
+        return;
+        if(!map.containsKey(dist))
+            map.put(dist, new ArrayList<>());
+        map.get(dist).add(root.data);
+        solution(root.left, dist+1, map);
+        solution(root.right, dist, map);
+    }
      public ArrayList<Integer> diagonal(Node root)
       {
-          ArrayList<Integer> ans = new ArrayList<>();
            if(root == null)
-                return ans;
-                
-            Queue<Node> queue = new LinkedList<>();
-            Node temp = root;
-            while(temp!= null){
-                queue.add(temp);
-                temp = temp.right;
-            }
-            queue.add(null);
+            return new ArrayList<>();
             
-            while(!queue.isEmpty()){
-                temp = queue.remove();
-                if(temp != null){
-                    ans.add(temp.data);
-                    temp = temp.left;
-                    while(temp != null){
-                        queue.add(temp);
-                        temp = temp.right;
-                    }
-                }
-                else{
-                    if(queue.isEmpty())
-                        break;
-                    queue.add(null);
-                }
+            Map<Integer, List<Integer>> map = new TreeMap<>();
+            solution(root, 0, map);
+            ArrayList<Integer> ans = new ArrayList<>();
+            for(int i=0 ; i<Integer.MAX_VALUE ; i++){
+                if(map.containsKey(i))
+                    ans.addAll(map.get(i));
+                else
+                    break;
             }
             return ans;
       }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
