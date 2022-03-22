@@ -125,27 +125,18 @@ class Node{
 
 class Solution{
     
-    public Pair solution(Node root){
+    public int solution(Node root){
         if(root == null)
-            return new Pair(0, 0);
-        Pair left = solution(root.left);
-        Pair right = solution(root.right);
+            return 0 ;
         int temp = root.data;
-        root.data = left.original + left.curr + right.original + right.curr;
-        return new Pair(temp, root.data);
+        root.data = solution(root.left) + solution(root.right);
+        return root.data+temp;
     }
+    
     public void toSumTree(Node root){
          
-         //pair class
-         Pair ans = solution(root);
-    }
-}
-
-class Pair{
-    int original;
-    int curr;
-    Pair(int original, int curr){
-        this.original = original;
-        this.curr = curr;
+        if(root == null)
+            return;
+        int ans = solution(root);
     }
 }
