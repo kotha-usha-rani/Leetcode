@@ -123,6 +123,7 @@ class Node {
 }
 */
 class Solution{
+    Node next = null;
     public Node getMinFromRight(Node root){
         if(root == null)
             return null;
@@ -141,7 +142,20 @@ class Solution{
             root.next = getMinFromRight(root.right);
         }
     }
+    public void sol(Node root){
+        if(root != null){
+            
+        sol(root.right);
+        root.next = next;
+        next = root;
+        sol(root.left);
+        }
+    }
     public void populateNext(Node root){
-        populate(root, null);
+        //inorder
+        //populate(root, null);
+        
+        //reverse inorder
+        sol(root);
     }
 }
