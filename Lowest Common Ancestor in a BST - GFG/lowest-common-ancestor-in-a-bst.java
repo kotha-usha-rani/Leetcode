@@ -135,14 +135,27 @@ class BST
         //     return LCA(root.right, n1, n2);
         
         //method 2
-        if(root == null)
-            return null;
-        if(n1 < root.data && n2 < root.data)
-            return LCA(root.left, n1, n2);
-        if(n1 > root.data && n2 > root.data)
-            return LCA(root.right, n1, n2);
-        return root;
+        // if(root == null)
+        //     return null;
+        // if(n1 < root.data && n2 < root.data)
+        //     return LCA(root.left, n1, n2);
+        // if(n1 > root.data && n2 > root.data)
+        //     return LCA(root.right, n1, n2);
+        // return root;
         
+        //method 3 iterative
+        if(root == null)
+            return root;
+        Node temp = root;
+        while(temp != null){
+            if(n1 < temp.data && n2 < temp.data)
+                temp = temp.left;
+            else if(n1 > temp.data && n2 > temp.data)
+                temp = temp.right;
+            else
+                break;
+        }
+        return temp;
     }
     
 }
