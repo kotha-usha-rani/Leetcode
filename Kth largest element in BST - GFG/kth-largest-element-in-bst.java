@@ -117,18 +117,38 @@ class Solution
 {
     // return the Kth largest element in the given BST rooted at 'root'
     public int count = 0 ;
-    public int ans = -1;
+    //public int ans = -1;
     public int kthLargest(Node root,int K)
     {
         //right root left
-        if(root == null)
-            return ans;
-        int left = kthLargest(root.right, K);
-        if(++count == K){
-            ans = root.data;
-            return ans;
+        // if(root == null)
+        //     return -1;
+        // int ans = kthLargest(root.right, K);
+        // if(++count == K){
+        //     ans = root.data;
+        //     return ans;
+        // }
+        // return kthLargest(root.left, K);
+        
+        //iterative
+        Stack<Node> stack = new Stack<>();
+        Node temp = root;
+        int count = 0 ;
+        while(!stack.isEmpty() || temp != null){
+            while(temp != null){
+                stack.push(temp);
+                temp = temp.right;
+            }
+            while(!stack.isEmpty()){
+                temp = stack.pop();
+                if(++count == K)
+                    return temp.data;
+                if(temp.left != null){
+                    temp = temp.left;
+                    break;
+                }
+            }
         }
-        int right = kthLargest(root.left, K);
-        return ans;
+        return -1;
     }
 }
