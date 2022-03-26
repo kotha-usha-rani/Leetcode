@@ -44,7 +44,6 @@ class Solution
             return findDiffInRoot2(root2.left, diff);
         else
             return findDiffInRoot2(root2.right, diff);
-            
     }
 	public static int countPairs(Node root1, Node root2, int x)
 	{
