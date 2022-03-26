@@ -34,7 +34,7 @@ class Node
 
 class Solution
 {
-    //public static int count = 0;
+    
     public static int findDiffInRoot2(Node root2, int diff){
         if(root2 == null)
             return 0;
@@ -46,15 +46,6 @@ class Solution
             return findDiffInRoot2(root2.right, diff);
             
     }
-    // public static void count(Node root1, Node root2, int x){
-    //     if(root1 == null || root1.data >= x)
-	   //     return ;
-	       
-	   //int diff = x - root1.data;
-	   //findDiffInRoot2(root2, diff);
-	   //count(root1.left, root2, x);
-	   //count(root1.right, root2, x);
-    // }
 	public static int countPairs(Node root1, Node root2, int x)
 	{
 	     if(root1 == null)
@@ -67,7 +58,8 @@ class Solution
     	   count = findDiffInRoot2(root2, diff);
 	   }
 	   count += countPairs(root1.left, root2, x);
-	   count += countPairs(root1.right, root2, x);
+	   if(root1.data< x)
+	    count += countPairs(root1.right, root2, x);
 	   return count;
 	}
 }
