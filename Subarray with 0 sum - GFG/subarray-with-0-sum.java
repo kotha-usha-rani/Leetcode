@@ -45,16 +45,13 @@ class Solution{
     {
         HashMap<Integer, Integer> map = new HashMap<>();
         int sum=0;
-        for(int i=0 ; i<=n ; i++){
+        for(int i=0 ; i<n ; i++){
+            sum +=  arr[i];
             Integer prev = map.get(sum);
-            if(i==n && prev == null)
-                return false;
-            else if(prev == null){
-                map.put(sum, i-1);
-                sum +=  arr[i];
-            }
-            else
+            if(prev != null || sum == 0)
                 return true;
+            else
+                map.put(sum, i);
         }
         return false;
     }
