@@ -38,12 +38,11 @@ class Solution {
         int count = 0;
         int max = 1 ;
         for(int i=0 ; i<nums.length ; i++){
-            if(!set.contains(nums[i]-1)){
-                count = 1 ; int k=1;
-                while(set.contains(nums[i]+k++))
-                    count++;
-            }
-            max = Math.max(count, max);
+            int k=1;
+            if(!set.contains(nums[i]-1))
+                while(set.contains(nums[i]+k))
+                    k++;
+            max = Math.max(k, max);
         }
         return max;
     }
