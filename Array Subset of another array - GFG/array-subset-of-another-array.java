@@ -48,15 +48,26 @@ class Compute {
     public String isSubset( long a1[], long a2[], long n, long m) {
         if(n < m)
             return "No";
+        // for(int i=0 ; i<m ; i++){
+        //     boolean ans = false;
+        //     for(int j=0 ; j<n ; j++){
+        //         if(a2[i] == a1[j])
+        //             ans = true;
+        //     }
+        //     if(!ans)
+        //         return "No";
+        // }
+        // return "Yes";
+        
+        //hashset
+        HashSet<Long> set = new HashSet<>();
+        for(int i=0 ; i<n ; i++)
+            set.add(a1[i]);
         for(int i=0 ; i<m ; i++){
-            boolean ans = false;
-            for(int j=0 ; j<n ; j++){
-                if(a2[i] == a1[j])
-                    ans = true;
-            }
-            if(!ans)
+            if(!set.contains(a2[i]))
                 return "No";
         }
         return "Yes";
+        
     }
 }
