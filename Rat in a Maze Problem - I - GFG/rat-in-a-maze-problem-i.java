@@ -35,24 +35,20 @@ class Rat {
 class Solution {
     public static ArrayList<String> help(int[][] arr, int i, int j, String path, boolean[][] track){
         ArrayList<String> ans = new ArrayList<>();
-        if(arr[i][j] == 0)
+        if(i<0 || j<0 || i>=arr.length || j>=arr.length || arr[i][j] == 0 || track[i][j] == true)
             return ans;
         if(i==arr.length-1 && j== arr.length-1){
             ans.add(path);
             return ans;
         }
         track[i][j] = true;
-        if(i-1 >= 0 && !track[i-1][j])
-            ans.addAll(help(arr, i-1, j, path+"U", track));
+        ans.addAll(help(arr, i-1, j, path+"U", track));
         
-        if(i+1 < arr.length && !track[i+1][j])
-            ans.addAll(help(arr, i+1, j, path+"D", track));
+        ans.addAll(help(arr, i+1, j, path+"D", track));
         
-        if(j-1 >= 0 && !track[i][j-1])
-            ans.addAll(help(arr, i, j-1, path+"L", track));
+        ans.addAll(help(arr, i, j-1, path+"L", track));
         
-        if(j+1 < arr.length && !track[i][j+1])
-            ans.addAll(help(arr, i, j+1, path+"R", track));
+        ans.addAll(help(arr, i, j+1, path+"R", track));
         
         track[i][j] = false;
         return ans;
