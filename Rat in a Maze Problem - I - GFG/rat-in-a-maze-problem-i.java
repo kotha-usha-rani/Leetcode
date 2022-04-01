@@ -33,28 +33,25 @@ class Rat {
 
 // m is the given matrix and n is the order of matrix
 class Solution {
-    public static ArrayList<String> help(int[][] arr, int i, int j, String path, boolean[][] track){
+    public static ArrayList<String> help(int[][] arr, int i, int j, String path, int[] di, int[] dj){
         ArrayList<String> ans = new ArrayList<>();
-        if(i<0 || j<0 || i>=arr.length || j>=arr.length || arr[i][j] == 0 || track[i][j] == true)
+        if(i<0 || j<0 || i>=arr.length || j>=arr.length || arr[i][j] == 0 || arr[i][j] == 2)
             return ans;
         if(i==arr.length-1 && j== arr.length-1){
             ans.add(path);
             return ans;
         }
-        track[i][j] = true;
-        ans.addAll(help(arr, i-1, j, path+"U", track));
-        
-        ans.addAll(help(arr, i+1, j, path+"D", track));
-        
-        ans.addAll(help(arr, i, j-1, path+"L", track));
-        
-        ans.addAll(help(arr, i, j+1, path+"R", track));
-        
-        track[i][j] = false;
+        arr[i][j] = 2 ;
+        String p = "UDLR";
+        for(int k=0 ; k<4 ; k++)
+            ans.addAll(help(arr, i+di[k], j+dj[k], path+p.charAt(k), di, dj));
+         arr[i][j] = 1 ;
         return ans;
     }
     public static ArrayList<String> findPath(int[][] m, int n) {
-        boolean[][] track = new boolean[n][n];
-        return help(m, 0, 0, "", track);
+        //boolean[][] track = new boolean[n][n];
+        int[] di = {-1, 1, 0, 0};
+        int[] dj = {0, 0, -1, 1};
+        return help(m, 0, 0, "", di, dj);
     }
 }
