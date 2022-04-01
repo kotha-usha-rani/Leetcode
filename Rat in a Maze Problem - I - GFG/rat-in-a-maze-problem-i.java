@@ -34,31 +34,30 @@ class Rat {
 // m is the given matrix and n is the order of matrix
 class Solution {
     public static ArrayList<String> help(int[][] arr, int i, int j, String path, boolean[][] track){
-        
         ArrayList<String> ans = new ArrayList<>();
+        if(arr[i][j] == 0)
+            return ans;
         if(i==arr.length-1 && j== arr.length-1){
             ans.add(path);
             return ans;
         }
         track[i][j] = true;
-        if(i-1 >= 0 && arr[i-1][j] != 0 && !track[i-1][j])
+        if(i-1 >= 0 && !track[i-1][j])
             ans.addAll(help(arr, i-1, j, path+"U", track));
         
-        if(i+1 < arr.length && arr[i+1][j] != 0 && !track[i+1][j])
+        if(i+1 < arr.length && !track[i+1][j])
             ans.addAll(help(arr, i+1, j, path+"D", track));
         
-        if(j-1 >= 0 && arr[i][j-1] != 0 && !track[i][j-1])
+        if(j-1 >= 0 && !track[i][j-1])
             ans.addAll(help(arr, i, j-1, path+"L", track));
         
-        if(j+1 < arr.length && arr[i][j+1] != 0 && !track[i][j+1])
+        if(j+1 < arr.length && !track[i][j+1])
             ans.addAll(help(arr, i, j+1, path+"R", track));
         
         track[i][j] = false;
         return ans;
     }
     public static ArrayList<String> findPath(int[][] m, int n) {
-        if(m[0][0] == 0)
-            return new ArrayList<>();
         boolean[][] track = new boolean[n][n];
         return help(m, 0, 0, "", track);
     }
