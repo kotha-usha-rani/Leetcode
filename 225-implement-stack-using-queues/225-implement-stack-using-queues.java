@@ -6,26 +6,19 @@ class MyStack {
     
     public void push(int x) {
         queue.add(x);
-    }
-    
-    public int pop() {
-        int size =  queue.size();
+        int size = queue.size();
         while(size > 1){
             queue.add(queue.poll());
             size--;
         }
+    }
+    
+    public int pop() {
         return queue.poll();
     }
     
     public int top() {
-        int size =  queue.size();
-        while(size > 1){
-            queue.add(queue.poll());
-            size--;
-        }
-        int ans = queue.peek();
-        queue.add(queue.poll());
-        return ans;
+       return queue.peek();
     }
     
     public boolean empty() {
