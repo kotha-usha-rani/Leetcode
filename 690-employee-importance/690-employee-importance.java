@@ -27,7 +27,7 @@ class Solution {
         queue.add(id);
         int count = 0;
         while(!queue.isEmpty()){
-            int currId = queue.remove();
+            int currId = queue.poll();
             for(int i=0 ; i<employees.size() ; i++){
                 if(employees.get(i).id == currId){
                     count += employees.get(i).importance;
