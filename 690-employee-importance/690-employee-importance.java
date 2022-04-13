@@ -23,20 +23,19 @@ class Solution {
         
         
         //iterative
+        HashMap<Integer, Employee> map = new HashMap<>();
+        for(Employee emp : employees){
+            map.put(emp.id, emp);
+        }
         Queue<Integer> queue = new LinkedList<>();
         queue.add(id);
         int count = 0;
         while(!queue.isEmpty()){
             int currId = queue.poll();
-            for(int i=0 ; i<employees.size() ; i++){
-                if(employees.get(i).id == currId){
-                    count += employees.get(i).importance;
-                    for(int j=0 ; j<employees.get(i).subordinates.size() ; j++){
-                        queue.add(employees.get(i).subordinates.get(j));
-                    }
-                    break;
-                }
-            }
+            Employee temp = map.get(currId);
+            count += temp.importance;
+            for(int subId : temp.subordinates)
+                queue.add(subId);
         }
         return count;
     }
