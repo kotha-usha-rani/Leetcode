@@ -8,6 +8,13 @@ class Employee {
 */
 
 class Solution {
+    public int helper(List<Employee> employees, int id, HashMap<Integer, Employee> map){
+        Employee temp = map.get(id);
+        int count = temp.importance;
+        for(int subId : temp.subordinates)
+            count += helper(employees, subId, map);
+        return count;
+    }
     public int getImportance(List<Employee> employees, int id) {
         //recursive
         // for(int i=0 ; i<employees.size() ; i++){
@@ -27,17 +34,19 @@ class Solution {
         for(Employee emp : employees){
             map.put(emp.id, emp);
         }
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(id);
-        int count = 0;
-        while(!queue.isEmpty()){
-            int currId = queue.poll();
-            Employee temp = map.get(currId);
-            count += temp.importance;
-            for(int subId : temp.subordinates)
-                queue.add(subId);
-        }
-        return count;
+        // Queue<Integer> queue = new LinkedList<>();
+        // queue.add(id);
+        // int count = 0;
+        // while(!queue.isEmpty()){
+        //     int currId = queue.poll();
+        //     Employee temp = map.get(currId);
+        //     count += temp.importance;
+        //     for(int subId : temp.subordinates)
+        //         queue.add(subId);
+        // }
+        // return count;
+        
+        return helper(employees, id, map);
     }
 }
 
