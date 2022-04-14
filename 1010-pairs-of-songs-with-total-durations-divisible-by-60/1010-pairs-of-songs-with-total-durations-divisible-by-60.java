@@ -7,8 +7,10 @@ class Solution {
             else
                map.put(time[i], 1);
         }
-        Arrays.sort(time); int count = 0;
-        int max = time[time.length-1];
+        int max = time[0];
+        for(int i=1 ; i<time.length ; i++)
+            max = Math.max(max, time[i]);
+        int count = 0;
         for(int i=0 ; i<time.length ; i++){
             if(map.get(time[i]) > 0){
                 int n=1 ;
