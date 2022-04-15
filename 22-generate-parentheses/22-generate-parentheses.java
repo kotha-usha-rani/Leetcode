@@ -1,25 +1,17 @@
 class Solution {
-    public void helper(int n, StringBuilder sb, HashSet<String> set){
-        if(n==1){
-            set.add(new String(sb.toString()));
-            return;
-        }
-        for(int i=0 ; i<(sb.length()/2)+1 ; i++){
-            sb.insert(i, "()");
-            helper(n-1, sb, set);
-            sb.delete(i, i+2);
-        }
-    }
-    public List<String> generateParenthesis(int n) {
+    public List<String> helper(int left, int right, String s){
         List<String> ans = new ArrayList<>();
-        if(n==1){
-            ans.add("()");
+        if(left > right || left < 0 || right < 0)
+            return ans;
+        if(left == 0 && right == 0){
+            ans.add(s);
             return ans;
         }
-        HashSet<String> set = new HashSet<>();
-        helper(n, new StringBuilder("()"), set);
-        for(String s : set)
-            ans.add(s);
+        ans.addAll(helper(left-1, right, s+"("));
+        ans.addAll(helper(left, right-1, s+")"));
         return ans;
+    }
+    public List<String> generateParenthesis(int n) {
+        return helper(n, n, "");
     }
 }
