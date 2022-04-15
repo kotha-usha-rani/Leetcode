@@ -4,7 +4,7 @@ class Solution {
             set.add(new String(sb.toString()));
             return;
         }
-        for(int i=0 ; i<sb.length()+1 ; i++){
+        for(int i=0 ; i<(sb.length()/2)+1 ; i++){
             sb.insert(i, "()");
             helper(n-1, sb, set);
             sb.delete(i, i+2);
