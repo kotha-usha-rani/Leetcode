@@ -1,7 +1,7 @@
 class Solution {
     public List<String> helper(int left, int right, String s){
         List<String> ans = new ArrayList<>();
-        if(left > right || left < 0 || right < 0)
+        if(left > right || left < 0 || right < 0 || right < left)
             return ans;
         if(left == 0 && right == 0){
             ans.add(s);
