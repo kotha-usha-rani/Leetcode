@@ -5,7 +5,7 @@ class Solution {
             ans.add(new ArrayList<>(smallAns));
             return ans;
         }
-        if(target < 0 || index >= candidates.length || candidates[index] > target)
+        if(target < 0 || index >= candidates.length)
             return ans;
         
         ans.addAll(helper(candidates, target, index+1, smallAns));
@@ -15,7 +15,7 @@ class Solution {
         return ans;
     }
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        Arrays.sort(candidates);
+        // Arrays.sort(candidates);
         return helper(candidates, target, 0, new ArrayList<>());
     }
 }
