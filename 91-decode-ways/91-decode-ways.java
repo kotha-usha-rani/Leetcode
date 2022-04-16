@@ -4,8 +4,8 @@ class Solution {
         dp[0] = 1;
         dp[1] = s.charAt(0) == '0' ? 0 : 1;
         for(int i=2 ; i<=s.length() ; i++){
-            int oneDigit = (int)(s.charAt(i-1)-'0');
-            int twoDigit = ((int)(s.charAt(i-2)-'0') * 10) + oneDigit ;
+            int oneDigit = s.charAt(i-1)-'0';
+            int twoDigit = ((s.charAt(i-2)-'0') * 10) + oneDigit ;
             if(oneDigit != 0)
                 dp[i] = dp[i-1];
             if(twoDigit >= 10 && twoDigit <= 26)
