@@ -4,7 +4,7 @@ class Solution {
             return n-1;
         int i=n/2;
         if(i%2 == 0)
-            i++;
+            i--;
         for(; i>=1 ; i-=2){
             if(n%i == 0)
                 return n-i;
