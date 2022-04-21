@@ -29,8 +29,10 @@ class Solution {
         
         StringBuilder ans = new StringBuilder();
         String[] strs = s.trim().split("\\s+");
-        for(int i=strs.length-1 ; i>=0 ; i--)
-            ans.append(strs[i]+" ");
+        for(int i=strs.length-1 ; i>=0 ; i--){
+            ans.append(strs[i]);
+            ans.append(' ');
+        }
         ans.deleteCharAt(ans.length()-1);
         return ans.toString();
     }
