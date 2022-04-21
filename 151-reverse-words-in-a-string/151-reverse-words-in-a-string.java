@@ -17,14 +17,21 @@ class Solution {
         // return sb.toString();
         
         
+        // String[] strs = s.trim().split("\\s+");
+        // int i=0, j=strs.length-1;
+        // while(i<j){
+        //     String temp = strs[i];
+        //     strs[i] = strs[j];
+        //     strs[j] = temp;
+        //     i++;j--;
+        // }
+        // return String.join(" ", strs);
+        
+        StringBuilder ans = new StringBuilder();
         String[] strs = s.trim().split("\\s+");
-        int i=0, j=strs.length-1;
-        while(i<j){
-            String temp = strs[i];
-            strs[i] = strs[j];
-            strs[j] = temp;
-            i++;j--;
-        }
-        return String.join(" ", strs);
+        for(int i=strs.length-1 ; i>=0 ; i--)
+            ans.append(strs[i]+" ");
+        ans.deleteCharAt(ans.length()-1);
+        return ans.toString();
     }
 }
