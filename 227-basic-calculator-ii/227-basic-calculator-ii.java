@@ -10,11 +10,11 @@ class Solution {
                 System.out.println(num);
                 if(oper == '-')
                     stack.push(-num);
-                if(oper == '+')
+                else if(oper == '+')
                     stack.push(num);
-                if(oper == '*')
+                else if(oper == '*')
                     stack.push(stack.pop()*num);
-                if(oper == '/')
+                else 
                     stack.push(stack.pop()/num);
                 
                 num = 0;
