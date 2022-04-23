@@ -22,11 +22,12 @@ class Solution {
     static long nthPosition(long n){
         if(n==1)
             return 0;
-        while(n>0){
-            if((n&1) == 0 && (n&(n-1))==0)
-                return n;
-            n--;
+        int i=2, ans = 0;
+        while(i<=n){
+            if((i&(i-1)) == 0)
+            ans = i;
+            i*=2;
         }
-        return 0;
+        return ans;
     }
 }
